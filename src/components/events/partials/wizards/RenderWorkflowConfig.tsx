@@ -120,20 +120,20 @@ const RenderCheckbox = <T extends RequiredFormProps>(
 
 const RenderRadio = <T extends RequiredFormProps>(
 	{ field } : { field: FieldSetField, formik: FormikProps<T> }) => {
-
 		return (
 			<li>
 				<div role="group" className="configField">
 					{field.options?.map(option =>
-						<label key={option.value}>
+						<div key={option.value}>
 							<Field
 								type="radio"
+								id={field.name + "-" + option.value}
 								className="configField"
 								name={"configuration." + field.name}
 								value={option.value}
 							/>
-							{option.label}
-						</label>,
+							<label htmlFor={field.name + "-" + option.value}>{option.label}</label>
+						</div>,
 					)}
 				</div>
 			</li>
