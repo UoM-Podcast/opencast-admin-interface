@@ -39,7 +39,6 @@ const fillDefaultConfig = (
     } else if (field.type === "datetime-local") {
       const date = new Date(new Date().toString().split("GMT")[0] + " UTC").toISOString().split(".")[0];
       defaultConfiguration[field.name] = date;
-      field.defaultValue = date;
     // set value in default configuration
     } else {
       defaultConfiguration[field.name] = field.value;
