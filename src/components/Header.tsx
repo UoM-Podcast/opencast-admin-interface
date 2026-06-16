@@ -185,6 +185,23 @@ const Header = () => {
 						</div>
 					)}
 
+					{/* PM Module */}
+					{!!orgProperties &&
+						!!orgProperties["org.opencastproject.admin.pmmodule.url"] && (
+							<div className="nav-dd" id="pm-dd">
+								<Tooltip title={t("PM_ADMIN_MODULE")}>
+									<a
+										href={
+											orgProperties["org.opencastproject.admin.pmmodule.url"]
+										}
+										target="_blank" rel="noreferrer"
+									>
+										<i className="fa fa-check-circle-o" />
+									</a>
+								</Tooltip>
+							</div>
+					)}
+
 					{/* System warnings and notifications */}
 					{user.isAdmin && (
 						<div
