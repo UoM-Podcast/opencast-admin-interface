@@ -1,4 +1,3 @@
-import moment from "moment";
 import { Event } from "../slices/eventSlice";
 
 /**
@@ -34,12 +33,19 @@ export const errorDetailStyle = {
 };
 
 export const formatDuration = (durationInMS: number) => {
-	const duration = moment.duration(durationInMS);
-	if (duration.asHours() > 1) {
-		return moment.utc(duration.asMilliseconds()).format("HH:mm:ss");
-	} else {
-		return moment.utc(duration.asMilliseconds()).format("mm:ss");
+	const totalSeconds = Math.floor(durationInMS / 1000);
+
+	const hours = Math.floor(totalSeconds / 3600);
+	const minutes = Math.floor((totalSeconds % 3600) / 60);
+	const seconds = totalSeconds % 60;
+
+	const pad = (n: number) => n.toString().padStart(2, "0");
+
+	if (hours > 0) {
+		return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
 	}
+
+	return `${pad(minutes)}:${pad(seconds)}`;
 };
 
 export const humanReadableBytesFilter = (bytesValue: string | number) => {

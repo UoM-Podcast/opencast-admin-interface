@@ -48,6 +48,7 @@ import SchedulingLocation from "../wizards/scheduling/SchedulingLocation";
 import SchedulingInputs from "../wizards/scheduling/SchedulingInputs";
 import SchedulingConflicts from "../wizards/scheduling/SchedulingConflicts";
 import { ParseKeys } from "i18next";
+import i18n from "../../../../i18n/i18n";
 
 /**
  * This component renders the source page for new events in the new event wizard.
@@ -366,7 +367,7 @@ const Schedule = <T extends {
 	inputDevices: Recording[]
 }) => {
 	const { t } = useTranslation();
-	const currentLanguage = getCurrentLanguageInformation();
+	const currentLanguage = getCurrentLanguageInformation(i18n.language);
 
 	const renderInputDeviceOptions = () => {
 		if (formik.values.location) {

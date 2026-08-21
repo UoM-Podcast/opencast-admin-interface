@@ -1,7 +1,6 @@
 import { PayloadAction, SerializedError, createSlice } from "@reduxjs/toolkit";
 import { eventsTableConfig } from "../configs/tableConfigs/eventsTableConfig";
 import axios, { AxiosError, AxiosProgressEvent } from "axios";
-import moment from "moment-timezone";
 import {
 	getURLParams,
 	prepareAccessPolicyRulesForPost,
@@ -809,7 +808,7 @@ export const updateScheduledEventsBulk = createAppAsyncThunk("events/updateSched
 { dispatch }) => {
 	const formData = new FormData();
 	const update = [];
-	const timezone = moment.tz.guess();
+	const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 	for (const changedEvent of values.changedEvents) {
 		const eventChanges = values.editedEvents.find(
@@ -1062,7 +1061,7 @@ export const checkForConflicts = async (
 export const checkForSchedulingConflicts = (events: EditedEvents[]) => async (dispatch: AppDispatch) => {
 	const formData = new FormData();
 	const update = [];
-	const timezone = moment.tz.guess();
+	const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 	for (const event of events) {
 		update.push({
 			events: [event.eventId],
